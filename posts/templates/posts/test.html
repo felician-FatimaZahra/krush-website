@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CodePen - Responsive SideBar Menu </title>
+<link rel="stylesheet" type="text/css" href="{% url 'css/feed.css'%}">
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
+<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+<div class="wrapper">
+<div class="sidebar">
+<div class="bg_shadow"></div>
+<div class="sidebar__inner">
+<div class="close">
+<i class="fas fa-times"></i>
+</div>
+<div class="profile_info">
+<div class="profile_img">
+<img src="https://i.imgur.com/A1Fjq0d.png" alt="profile_img">
+</div>
+<div class="profile_data">
+<p class="name">Alex John</p>
+<p class="role">UI Developer</p>
+<div class="btn">Update Profile</div>
+</div>
+</div>
+<ul class="siderbar_menu">
+<li><a href="#">
+<div class="icon"><i class="fas fa-laptop"></i></div>
+<div class="title">Dashboard</div>
+</a></li>
+<li><a href="#" class="active">
+<div class="icon"><i class="fas fa-newspaper"></i></div>
+<div class="title">Jobs</div>
+</a></li>
+<li><a href="#">
+<div class="icon"><i class="fas fa-file-alt"></i></div>
+<div class="title">Documents</div>
+</a></li>
+<li><a href="#">
+<div class="icon"><i class="fas fa-cog"></i></div>
+<div class="title">Settings</div>
+</a></li>
+<li><a href="#">
+<div class="icon"><i class="fas fa-question-circle"></i></div>
+<div class="title">Help</div>
+</a></li>
+</ul>
+</div>
+</div>
+<div class="main_container">
+<div class="top_navbar">
+<div class="hamburger">
+<div class="hamburger__inner">
+<i class="fas fa-bars"></i>
+</div>
+</div>
+<ul class="menu">
+<li><a href="#" class="active">Blogs</a></li>
+<li><a href="#">Contact</a></li>
+<li><a href="#">About</a></li>
+</ul>
+<ul class="right_bar">
+<li><i class="fas fa-search"></i></li>
+<li><i class="fas fa-sign-out-alt"></i></li>
+</ul>
+</div>
+<div class="container">
+<div class="item">
+Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
+</div>
+<div class="item">
+Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
+</div>
+<div class="item">
+Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
+</div>
+<div class="item">
+Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
+</div>
+<div class="item">
+Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
+</div>
+<div class="item">
+Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
+</div>
+<div class="item">
+Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
+</div>
+<div class="item">
+Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
+</div>
+</div>
+</div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<script id="rendered-js">
+$(".hamburger .fas").click(function () {
+  $(".wrapper").addClass("active");
+});
+
+$(".wrapper .sidebar .close").click(function () {
+  $(".wrapper").removeClass("active");
+});
+//# sourceURL=pen.js
+    </script>
+</body>
+</html>
+
+
+{% extends 'posts/base.html' %}
+
+{% block content %}
+        <div class="container pt-5">
+            <!-- <p>Common Tags: 
+            {% for mt in common_tags %}
+                <a href="#" class="badge badge-success">{{mt}}</a>
+            {% endfor %}
+            </p>
+ -->            <div class="row mb-1 posts">
+                    {% for post in posts %}
+                    <div class="col-md-6">
+                        <div class="cards">
+                            <div class="row no-gutters border rounded  flex-md-row mb-4 shadow-sm h-md-250">
+                                <div class="col p-4 d-flex flex-column position-static">
+                                    <h3 class="my-1"><a href="{% url 'post-detail' post.id %}">{{post.name}}</a></h3>
+
+                                    <div style="display:flex">
+                                        {% for tag in post.tags.all %}
+                                        <a href="{% url 'tagged' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+                                        {% endfor %}
+                                    </div>
+                                    <p class="mb-auto">{{post.nickname}}</p>
+                                    <p class="mb-auto">{{post.content}}</p>
+                                    <p class="mb-auto text-muted">{{post.published}}</p>
+                                </div>
+                            </div>
+                        </div>       
+                    </div>
+                    {% endfor %}
+            </div>
+        </div>    
+{% endblock content %}  
