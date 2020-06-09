@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as user_views
-from posts.views import home_view, CreateCrush, tagged, PostUpdateView, PostDeleteView, PostDetailView
+from posts.views import home_view, CreateCrush, tagged, statistics, PostUpdateView, PostDeleteView, PostDetailView
 from landing.views import landing_home
 
 urlpatterns = [
@@ -55,6 +55,7 @@ urlpatterns = [
     path('crush/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
     # path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('tag/<slug:slug>/', tagged, name="tagged"),
+    path('crush/statistics', statistics, name='statistics'),
 ]
 
 

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post
 from .forms import PostForm
+from collections import Counter
 from taggit.models import Tag
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -88,3 +89,15 @@ def tagged(request, slug):
         'posts':posts,
     }
     return render(request, 'posts/home.html', context)
+
+def statistics(request):
+    traits = Counter()
+    crushes =  Post.objects.filter(author=request.user)
+    for crush in crushes:
+        for trait in crush.tags.names():
+            traits[trait] += 1
+    context = {
+        'traits': dict(traits)
+    }
+    
+    return render(request, 'posts/statistics.html', context)
