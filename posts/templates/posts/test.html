@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
 <title>CodePen - Responsive SideBar Menu </title>
 <style>
-@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap");
 
 * {
   margin: 0;
@@ -20,17 +19,20 @@
   box-sizing: border-box;
   text-decoration: none;
   list-style: none;
-  font-family: "Montserrat", sans-serif;
 }
 
 body {
-  background: #f0f2f5;;
-}
+  background: #f0f2f5;
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
+}
 a{
   color: #4285f4;
 }
-
+.cards{
+  background: #fff;
+  border-radius: 4px;
+}
 .wrapper {
   display: flex;
   width: 100%;
@@ -57,7 +59,7 @@ a{
   width: 250px;
   position: fixed;
   top: 0;
-  left: 0;
+  left: 25px;
   height: 100%;
   background: #f0f2f5;
   z-index: 999;
@@ -97,50 +99,41 @@ a{
   margin-bottom: 15px;
 }
 
-.wrapper .sidebar__inner .profile_info .profile_data .btn {
-  padding: 10px;
-  border: 1px solid #1fafec;
+.wrapper .sidebar__inner .btn {
+  margin: 0 25px;
+  padding: 13px 25px;
   border-radius: 25px;
-  color: #1fafec;
+  background: #f76a6a;
+  border: 1px solid #f76a6a;
+  color: #fff;
   cursor: pointer;
 }
 
-.wrapper .sidebar__inner .profile_info .profile_data .btn:hover {
-  background: #1fafec;
+.wrapper .sidebar__inner .btn:hover {
+  background: #f76a6a;
+  border: 1px solid #f76a6a;
   color: #fff;
 }
 
 .wrapper .sidebar__inner .siderbar_menu li a {
-  padding: 10px 50px;
+  padding: 10px 30px;
   display: block;
-  height: 90px;
+  height: 55px;
   position: relative;
-  margin-bottom: 1px;
-  color: #88a3d0;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.wrapper .sidebar__inner .siderbar_menu li a .icon {
-  font-size: 32px;
   margin-bottom: 5px;
+  width: 70%;
+  font-size: 20px;
+  color: #88a3d0;
 }
 
-.wrapper .sidebar__inner .siderbar_menu li a:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: #1fafec;
-  display: none;
+.wrapper .sidebar__inner .siderbar_menu li a:hover{
+  width: 70%;
+  background: #dd5c9414;
+  border-radius: 25px;
+  color: #f76a6a;
 }
-
-.wrapper .sidebar__inner .siderbar_menu li a:hover,
 .wrapper .sidebar__inner .siderbar_menu li a.active {
-  background: #1d4c9e;
-  color: #fff;
+  color: #f76a6a;
 }
 
 .wrapper .sidebar__inner .siderbar_menu li a:hover:before,
@@ -158,7 +151,7 @@ a{
   position: fixed;
   top: 0;
   left: 306px;
-  border-radius: 2px;
+  border-radius: 25px;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.125);
   transition: all 0.3s ease;
 }
@@ -193,10 +186,9 @@ a{
   font-weight: 600;
   text-align: center;
 }
-
 .wrapper .main_container .top_navbar .menu li a.active,
 .wrapper .main_container .top_navbar .menu li a:hover {
-  color: #1fafec;
+  color: #f76a6a;
 }
 
 .wrapper .main_container .top_navbar .menu li a:hover:before,
@@ -243,7 +235,7 @@ a{
     top: 5px;
     right: 15px;
     font-size: 25px;
-    color: #fff;
+    color: #88a3d0;
   display: none;
   cursor: pointer;
 }
@@ -252,8 +244,18 @@ a{
   opacity: 0.5;
 }
 
+.trait-info{
+  color: #fff;
+  background-color: #f76a6a;
+}
+.trait-info:hover{
+  color: #fff;
+  background-color: #f76a6a;
+}
 
-@media screen and (max-width: 800px){
+
+
+@media screen and (max-width: 1000px){
   .wrapper .sidebar__inner{
     left: -100%;
   }
@@ -284,105 +286,101 @@ a{
   }
 }
 </style>
-<script>
-  window.console = window.console || function(t) {};
-</script>
-<script>
-  if (document.location.search.match(/type=embed/gi)) {
-    window.parent.postMessage("resize", "*");
-  }=
-</script>
+
 </head>
 <body translate="no">
+  <div class="wrapper">
+      <div class="sidebar">
+          <div class="bg_shadow"></div>
+          <div class="sidebar__inner">
+              <div class="close">
+              <i class="fas fa-times"></i>
+              </div>
+              <div class="profile_info">
+              <div class="profile_img">
+              <img class="rounded-circle" src="{{ user.profile.image.url }}" alt="profile_img">
+              </div>
+              <div class="profile_data">
+              <p class="role">Alex</p>
+              </div>
+              </div>
+                  <ul class="siderbar_menu">
+                      <li><a href="{% url 'crush' %}" class="active">
+                      <div class="title"><i class="fas fa-heart"></i> Home</div>
+                      </a></li>
+                      <li><a href="{% url 'profile' %}">
+                      <div class="title"><i class="fas fa-newspaper"></i> Profile</div>
+                      </a></li>
+                      <li><a href="#">
+                      <div class="title"><i class="fas fa-user-friends"></i> Friends</div>
+                      </a></li>
+                      <li><a href="#">
+                      <div class="title"><i class="fas fa-cog"></i> Settings</div>
+                      </a></li>
+                  </ul>
+                  <div><a href="{% url 'create-crush' %}" class="btn">Create Krush</a></div>
+
+          </div>
+      </div>
+      <div class="main_container">
+        <div class="top_navbar">
+            <div class="hamburger">
+            <div class="hamburger__inner">
+            <i class="fas fa-bars"></i>
+            </div>
+            </div>
+            <ul class="menu">
+                <li><a href="{% url 'crush' %}" class="active">Crushes</a></li>
+                <li><a href="{% url 'statistics' %}">Statistics</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+            <ul class="right_bar">
+                <li><a href="{% url 'statistics' %}"><i class="fas fa-chart-bar"></i></a></li>
+                <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></li>
+            </ul>
+        </div>
+
+        <div class="container">
+          <div>
+              <div class="item">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
+              </div>
+              <div class="item">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
+              </div>
+              <div class="item">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
+              </div>
+              <div class="item">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
+              </div>
+              <div class="item">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
+              </div>
+              <div class="item">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
+              </div>
+              <div class="item">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
+              </div>
+              <div class="item">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-<div class="wrapper">
-<div class="sidebar">
-<div class="bg_shadow"></div>
-<div class="sidebar__inner">
-<div class="close">
-<i class="fas fa-times"></i>
-</div>
-<div class="profile_info">
-<div class="profile_img">
-<img src="https://i.imgur.com/A1Fjq0d.png" alt="profile_img">
-</div>
-<div class="profile_data">
-<p class="name">Alex John</p>
-<p class="role">UI Developer</p>
-<div class="btn">Update Profile</div>
-</div>
-</div>
-<ul class="siderbar_menu">
-<li><a href="#">
-<div class="icon"><i class="fas fa-laptop"></i></div>
-<div class="title">Dashboard</div>
-</a></li>
-<li><a href="#" class="active">
-<div class="icon"><i class="fas fa-newspaper"></i></div>
-<div class="title">Jobs</div>
-</a></li>
-<li><a href="#">
-<div class="icon"><i class="fas fa-file-alt"></i></div>
-<div class="title">Documents</div>
-</a></li>
-<li><a href="#">
-<div class="icon"><i class="fas fa-cog"></i></div>
-<div class="title">Settings</div>
-</a></li>
-<li><a href="#">
-<div class="icon"><i class="fas fa-question-circle"></i></div>
-<div class="title">Help</div>
-</a></li>
-</ul>
-</div>
-</div>
-<div class="main_container">
-<div class="top_navbar">
-<div class="hamburger">
-<div class="hamburger__inner">
-<i class="fas fa-bars"></i>
-</div>
-</div>
-<ul class="menu">
-<li><a href="#" class="active">Blogs</a></li>
-<li><a href="#">Contact</a></li>
-<li><a href="#">About</a></li>
-</ul>
-<ul class="right_bar">
-<li><i class="fas fa-search"></i></li>
-<li><i class="fas fa-sign-out-alt"></i></li>
-</ul>
-</div>
-<div class="container">
-<div class="cards">
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
-</div>
-<div class="item">
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
-</div>
-<div class="item">
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
-</div>
-<div class="item">
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
-</div>
-<div class="item">
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
-</div>
-<div class="item">
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
-</div>
-<div class="item">
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
-</div>
-<div class="item">
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaerat vel iure quam repudiandae tempora velit sed ducimus obcaecati eum hic dignissimos porro, accusantium at corrupti dolor aut non suscipit eveniet cumque quo culpa?
-</div>
-</div>
-</div>
-</div>
-<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
+  <script type="text/javascript" src="{% static 'js/tagsinput.js'%}"></script>
+  <script src="{% static 'js/main.js' %}" type="232c8fa1d69ab1b850676250-text/javascript"></script>
+  <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="232c8fa1d69ab1b850676250-|49" defer=""></script>
 <script id="rendered-js">
 $(".hamburger .fas").click(function () {
   $(".wrapper").addClass("active");
