@@ -1,6 +1,6 @@
 {% extends 'posts/base.html' %}
 {% block content %}
-        <!-- <div class="top_navbar">
+        <div class="top_navbar">
             <div class="hamburger">
             <div class="hamburger__inner">
             <i class="fas fa-bars"></i>
@@ -12,27 +12,11 @@
                 <li><a href="#">About</a></li>
             </ul>
             <ul class="right_bar">
-                <li><i class="fas fa-search"></i></li>
+                <li><a href="{% url 'statistics' %}"><i class="fas fa-chart-bar"></i></a></li>
                 <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></li>
             </ul>
-        </div> -->
+        </div>
         <div class="container">
-          <div class="top_navbar">
-              <div class="hamburger">
-              <div class="hamburger__inner">
-              <i class="fas fa-bars"></i>
-              </div>
-              </div>
-              <ul class="menu">
-                  <li><a href="{% url 'crush' %}" class="active">Crushes</a></li>
-                  <li><a href="{% url 'statistics' %}">Statistics</a></li>
-                  <li><a href="#">About</a></li>
-              </ul>
-              <ul class="right_bar">
-                  <li><i class="fas fa-search"></i></li>
-                  <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></li>
-              </ul>
-          </div>
             <div class="row posts">
                                {% for post in posts %}
                                <div class="col-md-8">
