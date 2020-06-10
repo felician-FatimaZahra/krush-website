@@ -1,8 +1,30 @@
 {% extends 'posts/base.html' %}
 
 {% block content %}
-<div class="container">
-  <canvas id="myChart" width="400px" height="400px"></canvas>
+    <div class="top_navbar">
+        <div class="hamburger">
+        <div class="hamburger__inner">
+        <i class="fas fa-bars"></i>
+        </div>
+        </div>
+        <ul class="menu">
+            <li><a href="{% url 'crush' %}" >Crushes</a></li>
+            <li><a href="{% url 'statistics' %}" class="active">Statistics</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+        <ul class="right_bar">
+            <li><i class="fas fa-search"></i></li>
+            <li><i class="fas fa-sign-out-alt"></i></li>
+        </ul>
+    </div>
+    <div class="container">
+      <div class="row mb-1 posts">
+        <div class="col-md-8">
+          <canvas id="myChart" width="400px" height="400px"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
