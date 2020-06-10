@@ -137,7 +137,7 @@ a{
   position: fixed;
   top: 0;
   left: 306px;
-  border-radius: 2px;
+  border-radius: 25px;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.125);
   transition: all 0.3s ease;
 }
