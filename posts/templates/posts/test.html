@@ -1,10 +1,297 @@
-{% load static %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
 <title>CodePen - Responsive SideBar Menu </title>
-<link rel="stylesheet" type="text/css" href="{% url 'css/feed.css'%}">
+<style>
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  background: #bbc7df;
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.wrapper .sidebar{
+  position: relative;
+}
+
+.wrapper .sidebar .bg_shadow{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.wrapper .sidebar__inner {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #2a58ae;
+  z-index: 999;
+  transition: all 0.3s ease;
+}
+
+.wrapper .main_container {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+   transition: all 0.3s ease;
+}
+
+.wrapper .sidebar__inner .profile_info {
+  padding: 30px 50px;
+  text-align: center;
+}
+
+.wrapper .sidebar__inner .profile_info .profile_img {
+  width: 125px;
+  margin: 0 auto 15px;
+}
+
+.wrapper .sidebar__inner .profile_info .profile_img img {
+  width: 100%;
+  display: block;
+}
+
+.wrapper .sidebar__inner .profile_info .profile_data .name {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.wrapper .sidebar__inner .profile_info .profile_data .role {
+  font-weight: 300;
+  color: #88a3d0;
+  margin-bottom: 15px;
+}
+
+.wrapper .sidebar__inner .profile_info .profile_data .btn {
+  padding: 10px;
+  border: 1px solid #1fafec;
+  border-radius: 25px;
+  color: #1fafec;
+  cursor: pointer;
+}
+
+.wrapper .sidebar__inner .profile_info .profile_data .btn:hover {
+  background: #1fafec;
+  color: #fff;
+}
+
+.wrapper .sidebar__inner .siderbar_menu li a {
+  padding: 10px 50px;
+  display: block;
+  height: 90px;
+  position: relative;
+  margin-bottom: 1px;
+  color: #88a3d0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.wrapper .sidebar__inner .siderbar_menu li a .icon {
+  font-size: 32px;
+  margin-bottom: 5px;
+}
+
+.wrapper .sidebar__inner .siderbar_menu li a:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: #1fafec;
+  display: none;
+}
+
+.wrapper .sidebar__inner .siderbar_menu li a:hover,
+.wrapper .sidebar__inner .siderbar_menu li a.active {
+  background: #1d4c9e;
+  color: #fff;
+}
+
+.wrapper .sidebar__inner .siderbar_menu li a:hover:before,
+.wrapper .sidebar__inner .siderbar_menu li a.active:before {
+  display: block;
+}
+
+.wrapper .main_container .top_navbar {
+  width: calc(100% - 250px);
+  height: 60px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 25px;
+  position: fixed;
+  top: 0;
+  left: 250px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.125);
+   transition: all 0.3s ease;
+}
+
+.wrapper .main_container .top_navbar .hamburger {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  display: none;
+}
+
+.wrapper .main_container .top_navbar .hamburger .fas {
+  color: #88a3d0;
+  font-size: 25px;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wrapper .main_container .top_navbar .menu {
+  display: flex;
+  align-items: center;
+}
+
+.wrapper .main_container .top_navbar .menu li a {
+  margin: 0 15px;
+  padding: 0 15px;
+  position: relative;
+  color: #1d4c9e;
+  font-weight: 400;
+  text-align: center;
+}
+
+.wrapper .main_container .top_navbar .menu li a:before {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #1fafec;
+  display: none;
+}
+
+.wrapper .main_container .top_navbar .menu li a.active,
+.wrapper .main_container .top_navbar .menu li a:hover {
+  color: #1fafec;
+}
+
+.wrapper .main_container .top_navbar .menu li a:hover:before,
+.wrapper .main_container .top_navbar .menu li a.active:before {
+  display: block;
+}
+
+.wrapper .main_container .top_navbar .right_bar {
+  display: flex;
+  align-item: center;
+}
+
+.wrapper .main_container .top_navbar .right_bar li {
+  margin: 0 10px;
+}
+
+.wrapper .main_container .top_navbar .right_bar .fas {
+  font-size: 25px;
+  cursor: pointer;
+  color: #88a3d0;
+}
+
+.wrapper .main_container .top_navbar .right_bar li:hover,
+.wrapper .main_container .top_navbar .hamburger .fas:hover {
+  opacity: 0.5;
+}
+
+.wrapper .main_container .container {
+  padding: 30px;
+  margin-top: 60px;
+}
+
+.wrapper .main_container .container .item {
+  background: #fff;
+  padding: 20px;
+  border-bottom: 1px solid #d9e2e7;
+  font-size: 14px;
+  line-height: 22px;
+  margin-bottom: 15px;
+}
+
+.wrapper .sidebar__inner .close{
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    font-size: 25px;
+    color: #fff;
+  display: none;
+  cursor: pointer;
+}
+
+.wrapper .sidebar__inner .close:hover{
+  opacity: 0.5;
+}
+
+
+@media screen and (max-width: 800px){
+  .wrapper .sidebar__inner{
+    left: -100%;
+  }
+  .wrapper .main_container,
+  .wrapper .main_container .top_navbar{
+    margin-left: 0;
+    width: 100%;
+  }
+  .wrapper .main_container .top_navbar{
+    left: 0;
+  }
+  .wrapper.active .sidebar__inner{
+    left: 0;
+  }
+  .wrapper .sidebar__inner .close,
+  .wrapper .main_container .top_navbar .hamburger{
+    display: block;
+  }
+  .wrapper.active .sidebar .bg_shadow{
+    visibility: visible;
+    opacity: 0.7;
+  }
+}
+
+@media screen and (max-width: 530px){
+  .wrapper .main_container .top_navbar .menu{
+    display: none;
+  }
+}
+</style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
 <script>
   if (document.location.search.match(/type=embed/gi)) {
     window.parent.postMessage("resize", "*");
@@ -99,6 +386,7 @@ Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque nemo quaera
 </div>
 </div>
 </div>
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
 <script id="rendered-js">
 $(".hamburger .fas").click(function () {
@@ -112,38 +400,3 @@ $(".wrapper .sidebar .close").click(function () {
     </script>
 </body>
 </html>
-
-
-{% extends 'posts/base.html' %}
-
-{% block content %}
-        <div class="container pt-5">
-            <!-- <p>Common Tags: 
-            {% for mt in common_tags %}
-                <a href="#" class="badge badge-success">{{mt}}</a>
-            {% endfor %}
-            </p>
- -->            <div class="row mb-1 posts">
-                    {% for post in posts %}
-                    <div class="col-md-6">
-                        <div class="cards">
-                            <div class="row no-gutters border rounded  flex-md-row mb-4 shadow-sm h-md-250">
-                                <div class="col p-4 d-flex flex-column position-static">
-                                    <h3 class="my-1"><a href="{% url 'post-detail' post.id %}">{{post.name}}</a></h3>
-
-                                    <div style="display:flex">
-                                        {% for tag in post.tags.all %}
-                                        <a href="{% url 'tagged' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
-                                        {% endfor %}
-                                    </div>
-                                    <p class="mb-auto">{{post.nickname}}</p>
-                                    <p class="mb-auto">{{post.content}}</p>
-                                    <p class="mb-auto text-muted">{{post.published}}</p>
-                                </div>
-                            </div>
-                        </div>       
-                    </div>
-                    {% endfor %}
-            </div>
-        </div>    
-{% endblock content %}  

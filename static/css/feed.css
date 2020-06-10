@@ -176,7 +176,7 @@ a{
 }
 .wrapper .main_container .top_navbar .menu li a.active,
 .wrapper .main_container .top_navbar .menu li a:hover {
-  color: #4285f4;
+  color: #f76a6a;
   font-weight: 500;
 }
 
@@ -270,9 +270,9 @@ a{
     opacity: 0.7;
   }
 }
-/*
+
 @media screen and (max-width: 530px){
   .wrapper .main_container .top_navbar .menu{
     display: none;
   }
-}*/
+}
