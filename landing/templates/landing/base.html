@@ -31,31 +31,16 @@
 	            <!-- Navbar Right Side -->
 	            {% if user.is_authenticated %}
 		            <div class="site-menu navbar-nav">
-		            	<li class="has-children">
-		            		<a href="/crush">Crushs <i class="fas fa-angle-down"></i></a>
-		            		<ul class="dropdown">
-		            			<li><a href="#">Create Crush</a></li>
-		            			<li><a href="#">Update Crush</a></li>
-		            			<li><a href="#">Delete Crush</a></li>
-		            		</ul>
-		            	</li>
-		            	<li><a class="nav-link" href="/crush">Crushs</a></li>
+		            	<li><a class="nav-link" href="/crush">Dashboard</a></li>
 		            	<li><a class="nav-link" href="/crush/create">Create Crush</a></li>   
 					    <li><a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a></li>
 					    <li><a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a></li>
 		            </div>
 		        {% else %}
 		        	<div class="site-menu navbar-nav">
-		            	<li class="has-children">
-		            		<a href="#">About Us  <i class="fas fa-angle-down"></i></a>
-		            		<ul class="dropdown">
-		            			<li><a href="#">Team</a></li>
-		            			<li><a href="#">Features</a></li>
-		            			<li><a href="#">Sponsors/a></li>
-		            		</ul>
-		            	</li>		     
-					     <li><a class="nav-item nav-link" href="{% url 'register' %}">Register</a></li>
-					     <li><a class="nav-item nav-link" href="{% url 'login' %}">Login</a></li>
+		        		<li><a class="nav-item nav-link" href="{% url 'login' %}">Login</a></li>		     
+					    <li><a class="btn btn-primary" href="{% url 'register' %}">Register</a></li>
+					     
 		            </div>
 		        {% endif %}
 
