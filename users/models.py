@@ -20,25 +20,19 @@ class Profile(models.Model):
     #         img.thumbnail(output_size)
     #         img.save(self.image.path)
 class Friend(models.Model):
-    to_user = models.ManyToManyField(User)
-    from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user', null=True)
+    users = models.ManyToManyField(User)
+    current_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owner', null=True)
 
     @classmethod
-    def send_friend_request(cls, from_user, new_friend):
+    def make_friend(cls, current_user, new_friend):
         friend, created = cls.objects.get_or_create(
-            from_user=from_user
+            current_user=current_user
         )
-        friend.to_user.add(new_friend)
+        friend.users.add(new_friend)
 
-    # @classmethod
-    # def cancel_friend_request(cls, from_user, new_friend):
-
-    # @classmethod
-    # def accept_friend_request(cls, from_user, new_friend):
-        
     @classmethod
-    def delete_friend(cls, from_user, new_friend):
+    def lose_friend(cls, current_user, new_friend):
         friend, created = cls.objects.get_or_create(
-            from_user=from_user
+            current_user=current_user
         )
-        friend.to_user.remove(new_friend)
+        friend.users.remove(new_friend)
